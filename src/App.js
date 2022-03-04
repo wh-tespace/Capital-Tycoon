@@ -1,11 +1,12 @@
 import logo from './assets/logo.svg';
 import './style/App.css';
+import Logo from './components/Logo';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <Logo />
         <p>
           Boilerplate for React
         </p>
