@@ -1,4 +1,3 @@
-/* import '../style/botCompany.css'; */
 
 function BotCompany(companyInfo) {
   return (
