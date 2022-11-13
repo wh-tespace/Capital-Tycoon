@@ -1,0 +1,21 @@
+ul {
+	height: 100%;
+	width: 440px;
+	display: flex;
+	align-items: center;
+	list-style: none;
+	justify-content: space-between;
+}
+
+li {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	padding: 0 2rem;
+	background-color: #17be43;
+}
+
+li:hover {
+	cursor: pointer;
+	background-color: #1ad54c;
+}
