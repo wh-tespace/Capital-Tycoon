@@ -1,5 +1,5 @@
-ul {
-	width: 100vw;
+.botComList {
+	width: 100%;
 	height: 200px;
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);

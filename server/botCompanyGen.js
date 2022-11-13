@@ -1,12 +1,22 @@
+/* import { generateNewCompany } from './utils/functions.js'; */
+
+const { generateNewCompany } = require('./utils/functions.js');
+
 const express = require('express');
 const cors = require('cors');
 
-const names = require('./jsonFiles/names.json');
-/* console.log(names , 'names'); */
+
+
 const app = express();
 app.use(cors());
 
-app.get('/names/:count', (req, res) => {
+// Axios get
+
+app.get('/getNewCompany/', (req, res) => {
+	/* return generateNewCompany() */
+});
+
+/* app.get('/names/:count', (req, res) => {
   const count = req.params.count;
 
   console.log(count, 'count');
@@ -14,7 +24,7 @@ app.get('/names/:count', (req, res) => {
 	const namesArr = names.names.slice(0, count);
 	console.log(namesArr, 'namesArr');
 	return res.json(namesArr);
-});
+}); */
 
 app.get('/industries/:count', (req, res) => {
 	res.send('Hello World!');
