@@ -11,8 +11,8 @@ export default function PortLink() {
                <button className="portlink__login">Log in</button>
             </Link>
 
-            <Link to="/register">
-               <button classname="portlink__register">register</button>
+            <Link to="/signup">
+               <button className="portlink__register">Sign up</button>
             </Link>
          </div>
       </section>
