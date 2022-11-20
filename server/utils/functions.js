@@ -83,6 +83,7 @@ const generateIdenticon = (companyId) => {
 			break;
 		default:
 			imageUrl = `https://identicon-api.herokuapp.com/${imageId}/${imageSize}?format=(svg)`
+			break;
 	 }
 	
 	return imageUrl
