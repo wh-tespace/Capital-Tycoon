@@ -8,21 +8,26 @@ const suffix = require('../jsonFiles/business-Suffixes.json');
 
 const firebaseFunctions = require("./firebaseFunctions")
 
+
+// Gets a random name from the json file
 const generateRandName = () => {
 	const randName = (personNames.names[Math.floor(Math.random()*personNames.names.length)]);
 	return randName;
 }
 
+// Gets a random industry from the json file
 const generateRandIndustry = () => {
 	const randName = (industires.names[Math.floor(Math.random()*industires.names.length)]);
 	return randName;
 }
 
+// Gets a random suffix from the json file
 const generateRandSuffix = () => {
 	const randName = (suffix.names[Math.floor(Math.random()*suffix.names.length)]);
 	return randName;
 }
 
+// Generates a new company name
 const generateCompanyName = () => {
 	const name = generateRandName();
 	const industry = generateRandIndustry();
@@ -33,11 +38,13 @@ const generateCompanyName = () => {
 	return companyName
 }
 
+// Generates the current date
 const generateNewDate = () => {
 	const newDate = new Date().getTime()
 	return newDate
 }
 
+// Generates a random id
 const generateId = () => {
 	const newDate = generateNewDate()
 	const rndNum = Math.floor(Math.random() * 100000);
@@ -45,10 +52,12 @@ const generateId = () => {
 	return id
 }
 
+// Generates a random number between min and max
 const genRandNum = (min, max) => {
 	return Math.floor(Math.random() * (max - min +1) + min)
 }
 
+// Generates a random number of shares
 const generateShares = () => {
 	const availableShares = 10_000_000
 	const sharesOnMarket = genRandNum(1000, availableShares);
@@ -56,14 +65,22 @@ const generateShares = () => {
 	return sharesOnMarket
 }
 
+// Generates a random stock price
 const generateStockPrice = () => {
-	const stockPrice = genRandNum(0.1, 1000);
+	const stockPrice = genRandNum(0.001, 1000);
 	return stockPrice
 }
 
+// Generates a random color
 const generateRandomColor = () => {
 	const randomColor = Math.floor(Math.random()*16777215).toString(16);
 	return randomColor
+}
+
+// Gets total number of companies in the database
+const getNumberOfCompanies = async() => {
+ const  allBotCompanies = await firebaseFunctions.getAllBotCompanies()
+ return allBotCompanies.length
 }
 
 const generateIdenticon = (companyId) => {
@@ -73,22 +90,23 @@ const generateIdenticon = (companyId) => {
 	let imageUrl = ``
 	switch(imageApiIdx) {
 		case 0:
-			imageUrl = `https://source.boringavatars.com/bauhaus/${imageSize}/${imageId}?colors=264653,2a9d8f,e9c46b`
+			imageUrl = `https://source.boringavatars.com/bauhaus/${imageSize}/${imageId}?colors=${generateRandomColor()},${generateRandomColor()},${generateRandomColor()}`
 		  break;
 		case 1:
 			imageUrl = `https://source.boringavatars.com/beam/${imageSize}/${imageId}?colors=${generateRandomColor()},${generateRandomColor()},${generateRandomColor()}`
 		  break;
 		case 2:
-			imageUrl = `source.boringavatars.com/pixel/${imageSize}/${imageId}?colors=${generateRandomColor()},${generateRandomColor()},${generateRandomColor()}`
+			imageUrl = `https://source.boringavatars.com/pixel/${imageSize}/${imageId}?colors=${generateRandomColor()},${generateRandomColor()},${generateRandomColor()}`
 			break;
 		default:
-			imageUrl = `https://identicon-api.herokuapp.com/${imageId}/${imageSize}?format=(svg)`
+			imageUrl = `https://source.boringavatars.com/pixel/${imageSize}/${imageId}?colors=${generateRandomColor()},${generateRandomColor()},${generateRandomColor()}`
 			break;
 	 }
 	
 	return imageUrl
 }
 
+// Generates a new company
 const generateNewCompany = () => {
 	const newCompany = [];
 	const newCompanyName = generateCompanyName();
@@ -106,12 +124,28 @@ const generateNewCompany = () => {
 		availableShares: availableShares,
 		stockPrice: stockPrice,
 		netValue: netValue,
-		companyLogo: companyLogo
+		companyLogo: companyLogo,
+		bankrupt: false
 	});
 	console.log("sending to firebaseFunction", newCompany)
 	firebaseFunctions.storeBotCompany(newCompany);
 }
 
-generateNewCompany();
-firebaseFunctions.deleteBotCompany("*")
-module.exports = { generateNewCompany };
+/* generateNewCompany(); */
+/* firebaseFunctions.deleteBotCompany("*") */
+/* firebaseFunctions.getAllBotCompanies() */
+/* getNumberOfCompanies() */
+/* firebaseFunctions.deleteAllBotCompanies() */
+
+module.exports = {generateNewCompany,
+	getNumberOfCompanies,
+	generateNewDate,
+	generateId,
+	generateShares,
+	generateStockPrice,
+	generateRandomColor,
+	generateIdenticon,
+	generateRandName,
+	generateRandIndustry,
+	generateRandSuffix,
+	generateCompanyName};

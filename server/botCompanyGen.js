@@ -1,19 +1,28 @@
-/* import { generateNewCompany } from './utils/functions.js'; */
-
-const { generateNewCompany } = require('./utils/functions.js');
-
 const express = require('express');
 const cors = require('cors');
-
-
+const cron = require('node-cron');
+const { generateNewCompany, getNumberOfCompanies } = require('./utils/functions.js');
+const { getAllBotCompanies } = require('./utils/firebaseFunctions.js');
 
 const app = express();
 app.use(cors());
 
-// Axios get
+cron.schedule('* */15 * * * *', async() => {
+	console.log('running a task every 15th minute');
+	const numberOfCompanies = await getNumberOfCompanies()
+	console.log(numberOfCompanies, "number of companies")
+	if (numberOfCompanies < 50) {
+		/* generateNewCompany() */
+		console.log("generating new company test")
+	} else {
+		console.log("Max number of companies reached")
+	}
+ });
 
-app.get('/getNewCompany/', (req, res) => {
-	/* return generateNewCompany() */
+app.get('/invest', async(req, res) => {
+	console.log("Investing")
+	const allCompanies = await getAllBotCompanies()
+	return res.json(allCompanies)
 });
 
 /* app.get('/names/:count', (req, res) => {

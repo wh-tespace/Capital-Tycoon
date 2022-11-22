@@ -13,6 +13,7 @@ const storeBotCompany = async(botCompany) => {
 	const stockPrice = botCompany[0].stockPrice
 	const netValue = botCompany[0].netValue
 	const companyLogo = botCompany[0].companyLogo
+	const bankRupt = botCompany[0].bankrupt
 	const data = {
 		id: id,
 		name: companyName,
@@ -20,7 +21,8 @@ const storeBotCompany = async(botCompany) => {
 		availableShares: availableShares,
 		stockPrice: stockPrice,
 		netValue: netValue,
-		companyLogo: companyLogo
+		companyLogo: companyLogo,
+		bankrupt: bankRupt
 	}
 	const res = await botComCollectionRef.doc(id).set(data)
 }
@@ -30,4 +32,17 @@ const deleteBotCompany = async(company) => {
 	console.log(res, "deleted")
 }
 
-module.exports = { storeBotCompany, deleteBotCompany };
+const deleteAllBotCompanies = async() => {
+	const res = await botComCollectionRef.get()
+	res.forEach(doc => {
+		doc.ref.delete()
+	})
+}
+
+const getAllBotCompanies = async() => {
+	console.log("Getting all bot companies")
+	const snapshot = await botComCollectionRef.get()
+	return snapshot.docs.map(doc => doc.data())
+}
+
+module.exports = { storeBotCompany, deleteBotCompany, getAllBotCompanies, deleteAllBotCompanies };
