@@ -1,13 +1,16 @@
-ul {
+.navBar {
+	width: 100%;
+}
+
+.navBar__list {
 	height: 100%;
-	width: 440px;
 	display: flex;
 	align-items: center;
 	list-style: none;
 	justify-content: space-between;
 }
 
-li {
+.list__navItem {
 	display: flex;
 	align-items: center;
 	height: 100%;
@@ -15,7 +18,7 @@ li {
 	background-color: #17be43;
 }
 
-li:hover {
+.list__navItem:hover {
 	cursor: pointer;
 	background-color: #1ad54c;
 }

@@ -1,0 +1,62 @@
+.botCompanyItem {
+	display: flex;
+	flex-direction: column;
+	width: 250px;
+	max-width: 250px;
+	height: 310px;
+	background-color: #212121;
+	padding: 20px;
+}
+
+.botCompanyItem__header {
+	align-self: center;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.header__title {
+	font-size: 12px;
+	color: #fff;
+	padding-left: 10px;
+}
+
+.botCompanyItem__img {
+	width: 60px;
+	height: 60px;
+	border: 3px solid #038757;
+	border-radius: 50%;
+}
+
+.netWorth__value {
+	font-size: 18px;
+	color: #00FF19;
+	/* padding-left: 10px; */
+}
+
+.botCompanyItem__body {
+	width: 100%;
+	padding: 10px 0;
+	display: flex;
+	font-weight: 600;
+}
+
+.body__stockPrice {
+	width: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.stockPrice__value {
+	font-size: 20px;
+	color: #00FF19;
+}
+
+.arrow {
+	width: 30px;
+	height: 15px;
+}

@@ -4,35 +4,40 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import "./botComList.css";
-
 function BotComList() {
-	const names = botCompanies
-	console.log(names, "names")
+	const [posts, setPosts] = useState([]);
+	
+	useEffect( () => { 
+		 async function fetchData() {
+			  try {
+					const res = await axios.get('http://localhost:5000/invest/'); 
+					setPosts(res.data);
+					console.log(res.data, "res.data")
+			  } catch (err) {
+					console.log(err);
+			  }
+		 }
+		 fetchData();
+	}, []);
+
+
+
 return (
 
 	<ul className="botComList">
-		{
-			names.map((name, description, idx) => {
-			return <BotCompany name={name.name} key={idx} description={description.description} />
-		})
-		} 
+		{/*Return BotCompany component for each item in companies*/}
+		{posts.map((company) => (
+			<BotCompany
+				company={company} />
+		))}
+		
 	</ul>
   );
 }
-
-const getNames = async() => {
-	/* const {data} = await axios.get('http://localhost:5000/names/') */
-	const hello = [{name: "test"}]
-	return hello
-}
-
-const botCompanies = [
-	{ name: "dfsdf", description: 'This is company 1' },
-	{ name: "sdfsdf", description: 'This is company 2' },
-	{ name: "sdfsdf", description: 'This is company 3' },
-	{ name: "dsfsdf", description: 'This is company 4' },
-	{ name: "sdfsdf", description: 'This is company 5' },
-	{ name: "dsf", description: 'This is company 6' },
-];
+/* const getCompaniesFS = async() => {
+	const {data} = await axios.get('http://localhost:5000/invest/')
+	console.log(data, "data")
+	return data
+} */
 
 export default BotComList;

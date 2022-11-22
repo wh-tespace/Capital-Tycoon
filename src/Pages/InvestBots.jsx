@@ -1,3 +1,4 @@
+import "./styles/investBots.css";
 import React from 'react';
 import BotCompanyList from '../components/BotComList/BotComList';
 
