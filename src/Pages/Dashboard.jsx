@@ -1,12 +1,12 @@
-import { useNavigation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 
 const Dashboard = () => {
-    const { logOut, user } = userUseAuth();
-    const navigate = useNavigate();
+    const { logOut, user } = useUserAuth();
+    let navigate = useNavigate();
     const handleLogout = async () => {
         try {
-            await logout();
+            await logOut();
             navigate("/");
 
         } catch(error) {
@@ -19,9 +19,9 @@ const Dashboard = () => {
             <main>
                 <h2>You're in the game</h2>
 
-                <h1>{user}</h1>
+                <h2>{user.email}</h2>
 
-                <button onClick={handleLogout}></button>
+                <button onClick={handleLogout}>Logout</button>
             </main>
         </>
     )

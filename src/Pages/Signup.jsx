@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 
 const Signup = () => {
+  const [displayName, setDisplayName] = useState("")
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +28,8 @@ const Signup = () => {
         <h2>Signup</h2>
 
         <form onSubmit={handleSubmit}>
+          <input type="string" placeholder="Display name" onChange={(e) => setDisplayName(e.target.value)} />
+
           <input type="email" placeholder="Email address" onChange={(e) => setEmail(e.target.value)} />
 
           <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
