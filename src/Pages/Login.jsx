@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import GoogleButton from "react-google-button";
 import { useUserAuth } from "../context/UserAuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { logIn } = useUserAuth();
+  const { logIn, googleLogIn } = useUserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -23,10 +24,10 @@ const Login = () => {
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
     try {
-      await googleSignIn();
+      await googleLogIn();
       navigate("/dashboard");
-    } catch (error) {
-      console.log(error.message);
+    } catch (err) {
+      console.log(err.message);
     }
   };
 
@@ -43,9 +44,11 @@ const Login = () => {
           <button variant="primary" type="Submit">Log in</button>
         </form>
 
-        <button onClick={handleGoogleSignIn}>
-          Google
-        </button>
+        <GoogleButton
+            className="g-btn"
+            type="dark"
+            onClick={handleGoogleSignIn}
+          />
 
         <div>
           <p>Don't have an account?</p>
