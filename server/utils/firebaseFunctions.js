@@ -14,6 +14,8 @@ const storeBotCompany = async(botCompany) => {
 	const netValue = botCompany[0].netValue
 	const companyLogo = botCompany[0].companyLogo
 	const bankRupt = botCompany[0].bankrupt
+	const CDN = botCompany[0].CDN
+
 	const data = {
 		id: id,
 		name: companyName,
@@ -22,7 +24,8 @@ const storeBotCompany = async(botCompany) => {
 		stockPrice: stockPrice,
 		netValue: netValue,
 		companyLogo: companyLogo,
-		bankrupt: bankRupt
+		bankrupt: bankRupt,
+		CDN: CDN
 	}
 	const res = await botComCollectionRef.doc(id).set(data)
 }

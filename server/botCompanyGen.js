@@ -7,21 +7,22 @@ const { getAllBotCompanies } = require('./utils/firebaseFunctions.js');
 const app = express();
 app.use(cors());
 
-cron.schedule('* */15 * * * *', async() => {
+let checkAndGenerateCom = cron.schedule('* */5 * * * *', async() => {
 	console.log('running a task every 15th minute');
 	const numberOfCompanies = await getNumberOfCompanies()
 	console.log(numberOfCompanies, "number of companies")
 	if (numberOfCompanies < 50) {
-		/* generateNewCompany() */
+		generateNewCompany()
 		console.log("generating new company test")
 	} else {
 		console.log("Max number of companies reached")
+		checkAndGenerateCom.stop()
 	}
  });
 
 app.get('/invest', async(req, res) => {
 	console.log("Investing")
-	const allCompanies = await getAllBotCompanies()
+	let allCompanies = await getAllBotCompanies()
 	return res.json(allCompanies)
 });
 

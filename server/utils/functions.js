@@ -52,6 +52,15 @@ const generateId = () => {
 	return id
 }
 
+const generateDN = (id) => {
+	const cId = id.slice(-3)
+	console.log(cId)
+	const maxDetermination = 1000
+	const minDetermination = -1000
+	const dn = genRandNum(minDetermination, maxDetermination)
+	return dn
+}
+
 // Generates a random number between min and max
 const genRandNum = (min, max) => {
 	return Math.floor(Math.random() * (max - min +1) + min)
@@ -116,6 +125,7 @@ const generateNewCompany = () => {
 	const availableShares = generateShares()
 	const netValue = stockPrice * availableShares
 	const companyLogo = generateIdenticon(id)
+	const companyDeterminationNumber = generateDN(id)
 
 	newCompany.push({
 		id: id,
@@ -125,7 +135,8 @@ const generateNewCompany = () => {
 		stockPrice: stockPrice,
 		netValue: netValue,
 		companyLogo: companyLogo,
-		bankrupt: false
+		bankrupt: false,
+		CDN: companyDeterminationNumber
 	});
 	console.log("sending to firebaseFunction", newCompany)
 	firebaseFunctions.storeBotCompany(newCompany);
