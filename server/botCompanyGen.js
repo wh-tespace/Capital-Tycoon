@@ -3,6 +3,7 @@ const cors = require('cors');
 const cron = require('node-cron');
 const { generateNewCompany, getNumberOfCompanies } = require('./utils/functions.js');
 const { getAllBotCompanies } = require('./utils/firebaseFunctions.js');
+const { generateNewEvent } = require("./utils/eventFunctions.js");
 
 const app = express();
 app.use(cors());
@@ -23,6 +24,7 @@ let checkAndGenerateCom = cron.schedule('* */5 * * * *', async() => {
 app.get('/invest', async(req, res) => {
 	console.log("Investing")
 	let allCompanies = await getAllBotCompanies()
+	generateNewEvent(false)
 	return res.json(allCompanies)
 });
 
@@ -36,8 +38,9 @@ app.get('/invest', async(req, res) => {
 	return res.json(namesArr);
 }); */
 
-app.get('/industries/:count', (req, res) => {
-	res.send('Hello World!');
+app.get('/addEventBad', (req, res) => {
+	console.log("GenerateNewEvent")
+	
  });
 
  app.get('/business-Suffixes/:count', (req, res) => {
