@@ -3,10 +3,9 @@ Header {
 	top: 0;
 	left: 0;
 	background-color: #1ad54c;
-  	height: 10vh;
-  	width: 100%;
-  	color: white;
-	padding: 0 2em;
+	height: 100px;
+	width: 100%;
+	color: white;
 
 	display: flex;
 	align-items: center;
@@ -14,4 +13,8 @@ Header {
 
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 24px;
+}
+
+Header>* {
+	padding: 0 2rem;
 }
