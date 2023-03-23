@@ -1,12 +1,19 @@
-/* import '../style/botComList.css'; */
 import BotCompany from '../BotCompany';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const StyledBotComList = styled.div` 
-ul {
 
+ul {
+	width: 100vw;
+	height: 200px;
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+	grid-template-rows: 1fr;
+	list-style: none;
+	gap: 10px;
+	padding: 10px;
 }
 `
 
